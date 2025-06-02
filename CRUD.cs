@@ -32,9 +32,7 @@ namespace WebsiteSafetyChecker
                             {
                                 Id = reader.GetInt32(0),
                                 Url = reader.GetString(1),
-                                IsSafe = reader.GetBoolean(2),
-                                CheckedDate = reader.GetDateTime(3),
-                                Description = reader.IsDBNull(4) ? null : reader.GetString(4)
+                                IsSafe = reader.GetBoolean(2)
                             };
                         }
                     }
@@ -61,9 +59,7 @@ namespace WebsiteSafetyChecker
                             {
                                 Id = reader.GetInt32(0),
                                 Url = reader.GetString(1),
-                                IsSafe = reader.GetBoolean(2),
-                                CheckedDate = reader.GetDateTime(3),
-                                Description = reader.IsDBNull(4) ? null : reader.GetString(4)
+                                IsSafe = reader.GetBoolean(2)
                             });
                         }
                     }
@@ -80,15 +76,12 @@ namespace WebsiteSafetyChecker
                 using (var command = connection.CreateCommand())
                 {
                     command.CommandText = @"
-                        INSERT INTO WebsiteSafety (Url, IsSafe, CheckedDate, Description)
-                        VALUES (@Url, @IsSafe, @CheckedDate, @Description);
+                        INSERT INTO WebsiteSafety (Url, IsSafe)
+                        VALUES (@Url, @IsSafe);
                         SELECT SCOPE_IDENTITY();";
 
                     command.Parameters.AddWithValue("@Url", website.Url);
                     command.Parameters.AddWithValue("@IsSafe", website.IsSafe);
-                    command.Parameters.AddWithValue("@CheckedDate", website.CheckedDate);
-                    command.Parameters.AddWithValue("@Description", 
-                        (object)website.Description ?? DBNull.Value);
 
                     return Convert.ToInt32(command.ExecuteScalar());
                 }
@@ -105,17 +98,12 @@ namespace WebsiteSafetyChecker
                     command.CommandText = @"
                         UPDATE WebsiteSafety 
                         SET Url = @Url, 
-                            IsSafe = @IsSafe, 
-                            CheckedDate = @CheckedDate, 
-                            Description = @Description
+                            IsSafe = @IsSafe
                         WHERE Id = @Id";
 
                     command.Parameters.AddWithValue("@Id", website.Id);
                     command.Parameters.AddWithValue("@Url", website.Url);
                     command.Parameters.AddWithValue("@IsSafe", website.IsSafe);
-                    command.Parameters.AddWithValue("@CheckedDate", website.CheckedDate);
-                    command.Parameters.AddWithValue("@Description", 
-                        (object)website.Description ?? DBNull.Value);
 
                     return command.ExecuteNonQuery() > 0;
                 }

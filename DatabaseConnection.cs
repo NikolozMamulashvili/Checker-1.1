@@ -31,9 +31,7 @@ namespace WebsiteSafetyChecker
                             CREATE TABLE WebsiteSafety (
                                 Id INT IDENTITY(1,1) PRIMARY KEY,
                                 Url NVARCHAR(500) NOT NULL,
-                                IsSafe BIT NOT NULL,
-                                CheckedDate DATETIME NOT NULL,
-                                Description NVARCHAR(MAX)
+                                IsSafe BIT NOT NULL
                             )
                         END";
                     command.ExecuteNonQuery();

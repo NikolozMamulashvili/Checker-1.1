@@ -6,7 +6,7 @@ namespace WebsiteSafetyChecker
     {
         static void Main(string[] args)
         {
-            //connection string chaanacvle 
+            //chaanacvlet connection string 
             string connectionString = "123";
             
             var dbConnection = new DatabaseConnection(connectionString);

@@ -1,8 +1,16 @@
 # Checker-1.1
 Website safety checker
 
+DATABASE
+(view database in "code")
 
-DATABASE:--CREATE DATABASE WebsiteSafetyDB;
+
+
+
+
+
+
+--CREATE DATABASE WebsiteSafetyDB;
 --GO
 
 --USE  WebsiteSafetyDB;
